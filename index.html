@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.theme.min.css" />
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <body>
+
+        <!-- <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide">0000000000000000000000000</li>
+                    <li class="glide__slide">1111111111111111111111111</li>
+                    <li class="glide__slide">2222222222222222222222222</li>
+                </ul>
+                <div data-glide-el="controls">
+                    <button data-glide-dir="<<">Start</button>
+                    <button data-glide-dir=">>">End</button>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide" style="background-image: url(./images/Dress1.png);"></li>
+                    <li class="glide__slide" style="background-image: url(./images/Dress2.png);"></li>
+                    <li class="glide__slide" style="background-image: url(./images/Dress3.png);"></li>
+                    <li class="glide__slide" style="background-image: url(./images/Dress4.png);"></li>
+                    <li class="glide__slide" style="background-image: url(./images/Dress5.png);"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="center-image" class="show">
+            <img src="./images/logo.png" alt="Welcome">
+          </div>
+          
+          <button id="webcamButton"></button>
+        
+        <div style="position: relative;">
+            <video id="webcam" autoplay></video>
+            <canvas class="output_canvas" id="output_canvas" width="1280" height="720"
+                style="position: absolute; left: 0px; top: 0px;"></canvas>
+        </div>
+        <div id="bouncing-image">
+  <img src="./images/bouncing.png" alt="decoration">
+</div>
+
+<div id="popup-overlay">
+    <img id="popup-image" src="./images/popup.png" alt="Instructions">
+    <button id="close-popup">✕</button>
+  </div>
+
+<audio id="click-sound" preload="auto">
+    <source src="./sounds/click.mp3" type="audio/mpeg">
+</audio>
+<audio id="bg-music" loop autoplay>
+    <source src="./sounds/background.mp3" type="audio/mpeg">
+
+</audio>
+         
+        <div id="purikura-glow"></div>
+
+        <div id="ui-frame"></div>
+       
+
+        <script type="module" src="./script.js"></script>
+    </body>

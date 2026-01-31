@@ -1,0 +1,373 @@
+/* style.css – clean layout for webcam + canvas + outfit slider */
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fade in animation */
+body {
+  animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Fullscreen video + canvas */
+
+#center-image {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#center-image.show {
+  opacity: 1;
+}
+
+#center-image img {
+  max-width: 600px;
+  max-height: 600px;
+  width: 140vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(255, 182, 208, 0.5));
+  animation: bounce-landing 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce-landing {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}
+
+@media (max-width: 600px) {
+  #center-image img {
+    max-width: 250px;
+  }
+}
+
+/* Popup overlay */
+#popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#popup-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  animation: popupBounce 0.5s ease-out;
+}
+
+#close-popup {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #ff8ad6;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 301;
+}
+
+#close-popup:hover {
+  background: #ff8ad6;
+  transform: scale(1.1) rotate(90deg);
+}
+
+#close-popup:active {
+  transform: scale(0.9) rotate(90deg);
+}
+
+@keyframes popupBounce {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  #popup-image {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+  
+  #close-popup {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    top: 3%;
+    right: 3%;
+  }
+}
+
+#webcam,
+#output_canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover;
+}
+
+/* Mirror like a selfie */
+#webcam {
+  transform: scaleX(-1);
+  filter: brightness(1.1) contrast(0.95) saturate(0.9);
+  z-index: 10;
+}
+
+#output_canvas {
+  transform: scaleX(-1);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Glow overlay */
+
+#purikura-glow {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 236, 244, 0.25) 0%, rgba(255, 200, 230, 0.1) 55%, transparent 75%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Cute frame */
+
+
+/* Webcam enable button */
+
+/* Webcam enable button */
+
+/* Webcam enable button - pure image, no container */
+
+#webcamButton {
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 150;
+  width: 210px;
+  height: 110px;
+  background-image: url('./images/button.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  font-size: 0;
+  color: transparent;
+}
+
+#webcamButton.webcam-active {
+  top: 1.5rem;
+  left: auto;
+  right: 1.5rem;
+  transform: translate(0, 0);
+}
+
+#webcamButton:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+#webcamButton.webcam-active:hover {
+  transform: translate(0, 0) scale(1.05);
+}
+
+#webcamButton:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+#webcamButton.webcam-active:active {
+  transform: translate(0, 0) scale(0.95);
+}
+
+/* Remove Material Design styles completely */
+#webcamButton .mdc-button__ripple,
+#webcamButton .mdc-button__label {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  #webcamButton {
+    width: 150px;
+    height: 60px;
+  }
+}
+/* Title banner (if you have one in HTML) */
+
+/* Outfit slider at the bottom */
+
+.bottom-slider {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 720px);
+  z-index: 120;
+}
+
+/* Override some default glide styles */
+
+.glide,
+.glide__track,
+.glide__slides {
+  margin: 0 !important;
+  width: 100%;
+}
+
+.glide__slides {
+  display: flex;
+  align-items: center;
+}
+
+.glide__slide {
+  height: 110px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.glide__slide--active {
+  transform: translateY(-8px) scale(1.04);
+  border-color: #ffb2d0;
+  background-color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Glide arrows *
+/* Also hide any arrow text if needed */
+.glide__arrow--left,
+.glide__arrow--right {
+    display: none;
+}
+
+@media (max-width: 600px) {
+  .glide__slide {
+    height: 80px;
+  }
+
+  #ui-frame {
+    inset: 1.5vh 3vw;
+  }
+}
+
+#ui-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./images/frame.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 200;
+}
+
+#bouncing-image {
+  position: fixed;
+  bottom: 350px; /* Adjust position as needed */
+  right: 100px;   /* Adjust position as needed */
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+#bouncing-image.show {
+  opacity: 1;
+}
+
+#bouncing-image img {
+  width: 250px;  /* Adjust size as needed */
+  height: auto;
+  animation: bounce-continuous 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes bounce-continuous {
+  0%, 100% {
+    transform: translateY(0) scaleY(1) scaleX(1);
+  }
+  25% {
+    transform: translateY(-20px) scaleY(1.1) scaleX(0.9);
+  }
+  50% {
+    transform: translateY(-30px) scaleY(1) scaleX(1);
+  }
+  75% {
+    transform: translateY(0) scaleY(0.9) scaleX(1.1);
+  }
+}
